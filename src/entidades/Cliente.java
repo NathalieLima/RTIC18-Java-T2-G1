@@ -1,4 +1,4 @@
-package interfaces;
+package entidades;
 
 public class Cliente {
 	private String cpf;
