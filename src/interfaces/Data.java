@@ -59,13 +59,13 @@ public class Data {
         return data_data;
     }
 
-    // Exemplo de uso
-    public static void main(String[] args) {
-        // Criar uma instância com a data atual
-        Data data_errada = Data.obterDataDeString("15/1");
-        System.out.println("Data Atual: " + data_errada.formatarData());
+    // // Exemplo de uso
+    // public static void main(String[] args) {
+    //     // Criar uma instância com a data atual
+    //     Data data_errada = Data.obterDataDeString("15/1");
+    //     System.out.println("Data Atual: " + data_errada.formatarData());
 
-        Data data_certa = Data.obterDataDeString("15/12/2010");
-        System.out.println("Data Atual: " + data_certa.formatarData());
-    }
+    //     Data data_certa = Data.obterDataDeString("15/12/2010");
+    //     System.out.println("Data Atual: " + data_certa.formatarData());
+    // }
 }
