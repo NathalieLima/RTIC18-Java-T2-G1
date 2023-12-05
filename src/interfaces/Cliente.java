@@ -7,7 +7,8 @@ public class Cliente {
 	public String getCPF() {
 		return this.cpf;
 	}
-	public void setCpf(String cpf) {
+	
+	public void setCPF(String cpf) {
 		this.cpf = cpf;
 	}
 	
