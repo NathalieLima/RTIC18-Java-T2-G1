@@ -78,3 +78,81 @@ public class App {
 		}
 	}
 }
+
+public class MenuFaturas {
+    private List<Fatura> faturas;
+
+    public MenuFaturas() {
+        faturas = new ArrayList<>();
+    }
+
+    public void criaFatura(String matricula, double valorLeituraAtual) {
+        for (Fatura fatura : faturas) {
+            if (fatura.getImovel().getMatricula().equals(matricula)) {
+                double ultimaLeitura = fatura.getUltimaLeitura();
+                fatura.setPenultimaLeitura(ultimaLeitura);
+                fatura.setUltimaLeitura(valorLeituraAtual);
+                fatura.setValor(calcularValor(valorLeituraAtual, ultimaLeitura));
+                fatura.setQuitado(false);
+                return;
+            }
+        }
+
+        Fatura novaFatura = new Fatura(matricula, valorLeituraAtual);
+        faturas.add(novaFatura);
+    }
+
+    public double calcularValor(double valorLeituraAtual, double ultimaLeitura) {
+        return (valorLeituraAtual - ultimaLeitura) * 10;
+    }
+
+    public void listaFaturas() {
+        for (Fatura fatura : faturas) {
+            System.out.println(fatura);
+        }
+    }
+
+    public void listaFaturasEmAberto() {
+        for (Fatura fatura : faturas) {
+            if (!fatura.isQuitado()) {
+                System.out.println(fatura);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MenuFaturas menuFaturas = new MenuFaturas();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Menu Faturas");
+            System.out.println("1 - Criar Fatura");
+            System.out.println("2 - Listar Faturas");
+            System.out.println("3 - Listar Faturas em Aberto");
+            System.out.println("4 - Sair");
+
+            int opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite a matrícula do imóvel:");
+                    String matricula = scanner.next();
+                    System.out.println("Digite o valor da leitura atual:");
+                    double valorLeituraAtual = scanner.nextDouble();
+                    menuFaturas.criaFatura(matricula, valorLeituraAtual);
+                    break;
+                case 2:
+                    menuFaturas.listaFaturas();
+                    break;
+                case 3:
+                    menuFaturas.listaFaturasEmAberto();
+                    break;
+                case 4:
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+    }
+}
