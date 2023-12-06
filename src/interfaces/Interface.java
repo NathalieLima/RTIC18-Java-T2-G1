@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Interface {
+
+	
 	public static void mostrarMensagemDefault(ArrayList<String> lista_opcoes) {
 		System.out.println("Insira um número entre 0 e " + lista_opcoes.size());
 	}
@@ -23,6 +25,7 @@ public class Interface {
 	}
 	
 	public static void gestaoClientes() {
+		App x = new App();
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -41,19 +44,24 @@ public class Interface {
 					System.out.println("Retornando...");
 					break;
 			
-				case 1: 
+				case 1:
+					x.incluirCliente();
 					break;
 					
 				case 2:
+					x.consultarCliente();
 					break;
 					
 				case 3:
+					x.listarCliente();
 					break;
 					
 				case 4:
+					x.excluirCliente();
 					break;
 					
 				case 5:
+					x.alterarCliente();
 					break;
 					
 				default:

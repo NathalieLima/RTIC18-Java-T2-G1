@@ -12,53 +12,51 @@ public class App {
 
 	public void incluirCliente() {
 		System.out.println("Incluir cliente");
-		String nome = entrada.next("Nome: ");
-		String cpf = entrada.next("CPF: ");
-		Cliente fulano = new Cliente(cpf, nome);
+		System.out.println("digite o nome:");
+		String nome = entrada.next();
+		System.out.println("digite o cpf:");
+		String cpf = entrada.next();
+		Cliente fulano = new Cliente(nome, cpf);
 		cliente.add(fulano);
 	}
 
 
 	public void consultarCliente() {
-		String cpf = entrada.next("Digite o cpf do cliente: ");
+		System.out.println("Consultar cliente, digite o CPF: ");
+		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("Cliente:" + c.getNome() + "CPF: " + c.getCPF());
-			} else {
-				System.out.println("Cliente não encontrado");
-
-			}
+			} 
 		}
 	}
 
 	public void listarCliente() {
 		for (Cliente c : cliente) {
-			System.out.println("Cliente:" + c.getNome() + "CPF: " + c.getCPF());
+			System.out.println("Cliente: " + c.getNome() + "  CPF: " + c.getCPF());
 		}
 	}
 
 	public void excluirCliente() {
-		String cpf = entrada.next("Digite o cpf do cliente a ser excluido: ");
+		System.out.println("Digite o cpf do cliente a ser excluido:");
+		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				cliente.remove(c);
 				System.out.println("Cliente excluido");
-			} else {
-				System.out.println("Cliente não encontrado");
-
-			}
+			} 
 		}
 
 	}
 
 	public void alterarCliente() {
-		String cpf = entrada.next("Digite o cpf do cliente a ser alterado: ");
+		System.out.println("Digite o cpf do cliente a ser alterado:");
+		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
-				c.setNome(entrada.next("Digite o novo nome: "));
-			} else {
-				System.out.println("Cliente não encontrado");
-			}
+				System.out.println("Digite o novo nome: ");
+				c.setNome(entrada.next());
+			} 
 		}
 	}
 
