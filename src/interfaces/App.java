@@ -1,9 +1,14 @@
 package interfaces;
+import entidades.*;
+import auxiliares.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import entidades.Fatura;
+import entidades.Imovel;
 
 public class App {
 	Scanner entrada = new Scanner(System.in);

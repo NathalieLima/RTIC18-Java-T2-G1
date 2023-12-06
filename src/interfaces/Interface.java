@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Interface {
-	
-
-	
 	public static void mostrarMensagemDefault(ArrayList<String> lista_opcoes) {
 		System.out.println("Insira um número entre 0 e " + lista_opcoes.size());
 	}

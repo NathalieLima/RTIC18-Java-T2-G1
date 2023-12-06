@@ -1,4 +1,4 @@
-package interfaces;
+package entidades;
 
 import java.time.LocalDate;
 
