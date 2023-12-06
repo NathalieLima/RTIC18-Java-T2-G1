@@ -1,6 +1,8 @@
 package interfaces;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Fatura {
     private LocalDate data;
@@ -8,6 +10,9 @@ public class Fatura {
     private double penultima_leitura;
     private double valor;
     private boolean quitado = false;
+    
+    Scanner entrada = new Scanner(System.in);
+
 
     // setters and getters
 
@@ -59,5 +64,47 @@ public class Fatura {
         this.valor = valor;
         this.quitado = quitado;
     }
+    //Metodos
+    public void lerConsumo(ArrayList<Imovel>imovel,ArrayList<Fatura> fatura) {
+		System.out.println("Digite a mátricula do imóvel");
+		String matricula = entrada.next();
+		for (Imovel i : imovel) {
+			if (i.getMatricula().equals(matricula)) {
+				System.out.println("Digite a nova leitura");
+				double novaleitura = entrada.nextDouble();
+				i.setPenultima_leitura(i.getUltima_leitura());
+				i.setUltima_leitura(novaleitura);
+				double valor = 10 * (novaleitura - i.getPenultima_leitura());
+				Fatura fat = new Fatura(LocalDate.now(), i.getUltima_leitura(), i.getPenultima_leitura(), valor, true);
+				fatura.add(fat);
+			}
+		}
+	}
 
+	public void listarFatura(ArrayList<Imovel>imovel,ArrayList<Fatura> fatura) {
+		System.out.println("Digite a mátricula do imóvel");
+		String matricula = entrada.next();
+		for (Imovel i : imovel) {
+			if (i.getMatricula().equals(matricula)) {
+				for (Fatura f : fatura) {
+					System.out.println("Data: " + f.getData() + "Valor: " + f.getValor() + "Quitado: " + f.getQuitado());
+				}
+
+			}
+		}
+	}
+
+	public void listarFaturaInadinplente(ArrayList<Imovel>imovel,ArrayList<Fatura> fatura) {
+		System.out.println("Digite a mátricula do imóvel");
+		String matricula = entrada.next();
+		for (Imovel i : imovel) {
+			if (i.getMatricula().equals(matricula)) {
+				for (Fatura f : fatura) {
+					if (!f.getQuitado()) {
+						System.out.println("Data: " + f.getData() + "Valor: " + f.getValor() + "Quitado: ");
+					}
+				}
+			}
+		}
+	}
 }
