@@ -10,6 +10,9 @@ public class App {
 	ArrayList<Cliente> cliente = new ArrayList<Cliente>();
 	ArrayList<Imovel> imovel = new ArrayList<Imovel>();
 	ArrayList<Fatura> fatura = new ArrayList<Fatura>();
+    ArrayList<Reparo> reparos = new ArrayList<Reparo>();
+    ArrayList<Falha> falhas = new ArrayList<Falha>();
+
 
 	public void incluirCliente() {
 		System.out.println("Incluir cliente");
@@ -174,6 +177,119 @@ public class App {
 			}
 		}
 	}
+
+    public void incluirFalha() {
+        System.out.println("Informe a matrícula do imóvel associado à falha:");
+        String matricula = entrada.nextLine();
+        entrada.nextLine();
+
+        Imovel imovelAssociado = buscarImovelPorMatricula(matricula);
+        if (imovelAssociado == null) {
+            System.out.println("Imóvel não encontrado.");
+            return;
+        }
+
+        System.out.println("Informe a descrição da falha:");
+        String descricao = entrada.nextLine();
+
+        System.out.println("Informe a previsão para a resolução da falha:");
+        String previsao = entrada.nextLine();
+
+        System.out.println("Informe a data de início da falha:");
+        String dataInicio = entrada.nextLine();
+
+        Falha novaFalha = new Falha();
+        novaFalha.descricao = descricao;
+        novaFalha.previsao = previsao;
+        novaFalha.dataInicio = dataInicio;
+
+        falhas.add(novaFalha);
+
+        
+        Reparo reparo = new Reparo(descricao, previsao, dataInicio);
+        
+        reparo.resolvido = false;
+
+        reparos.add(reparo);
+
+        System.out.println("Falha registrada com sucesso.");
+    }
+
+    public void listarReparosEmAberto() {
+        System.out.println("===== Reparos em Aberto =====");
+        for (Reparo reparo : reparos) {
+            if (!reparo.resolvido) {
+                System.out.println("Descrição: " + reparo.descricao);
+                System.out.println("Previsão: " + reparo.previsao);
+                System.out.println("Data de Início: " + reparo.dataInicio);
+                System.out.println("Resolvido: " + (reparo.resolvido ? "Sim" : "Não"));
+                System.out.println("-----------");
+            }
+        }
+    }
+
+    public void encerrarReparo() {
+        System.out.println("Informe a descrição do reparo a ser encerrado:");
+        String descricaoReparo = entrada.nextLine();
+
+        Reparo reparo = buscarReparoPorDescricao(descricaoReparo);
+
+        if (reparo == null) {
+            System.out.println("Reparo não encontrado.");
+            return;
+        }
+
+        System.out.println("A falha associada a este reparo foi resolvida? (Sim/Não)");
+        String resposta = entrada.nextLine().toLowerCase();
+
+        if ("sim".equals(resposta)) {
+            reparo.resolvido = true;
+            System.out.println("Reparo encerrado com sucesso.");
+        } else if ("não".equals(resposta)) {
+            
+            System.out.print("Digite uma nova previsão em dias: ");
+            String novaPrevisao = entrada.nextLine();
+            System.out.print("Digite uma nova data para inicio ");
+            String novaDataInicio = entrada.nextLine();
+            Reparo novoReparo = new Reparo(descricaoReparo, novaPrevisao, novaDataInicio);
+            
+
+            novoReparo.descricao = descricaoReparo;
+            novoReparo.previsao = novaPrevisao;
+            novoReparo.dataInicio = novaDataInicio;
+            novoReparo.resolvido = false;                 
+
+            
+
+            reparos.add(novoReparo);
+
+            System.out.println("Novo reparo criado para a mesma falha.");
+        } else {
+            System.out.println("Resposta inválida.");
+        }
+    }
+
+    public Imovel buscarImovelPorMatricula(String matricula) {
+        for (Imovel imov : imovel) {
+            
+            if (imov.getMatricula() == matricula) {
+                return imov;
+            }
+        }
+        return null;
+    }
+
+    public Reparo buscarReparoPorDescricao(String descricao) {
+        for (Reparo reparo : reparos) {
+            if (reparo.descricao.equals(descricao)) {
+                return reparo;
+            }
+        }
+        return null;
+    }
+
+
+
 
 	public static void main(String[] args) {
 		Interface app = new Interface();

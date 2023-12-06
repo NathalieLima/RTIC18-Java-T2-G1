@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.sql.Date;
+
 public class Reparo {
     String descricao;
     String previsao;
@@ -47,11 +49,11 @@ public class Reparo {
         this.resolvido = resolvido;
     }
 
-    public Reparo(String descricao, String previsao, String dataInicio, String dataFim) {
+    public Reparo(String descricao, String previsao, String dataInicio) {
         this.descricao = descricao;
         this.previsao = previsao;
         this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+        this.dataFim = "dd/mm/yyyy";
         this.resolvido = false;
     }
 
