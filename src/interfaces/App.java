@@ -1,4 +1,8 @@
 package interfaces;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,13 +10,19 @@ import java.util.Scanner;
 public class App {
 	Scanner entrada = new Scanner(System.in);
 	ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+<<<<<<< Updated upstream
 	public void incluirCliente(){
+=======
+
+	public void incluirCliente() {
+>>>>>>> Stashed changes
 		System.out.println("Incluir cliente");
 		String nome = entrada.next("Nome: ");
 		String cpf = entrada.next("CPF: ");
 		Cliente fulano = new Cliente(cpf, nome);
 		cliente.add(fulano);
 	}
+<<<<<<< Updated upstream
 	public void consultarCliente(){
 	
 	}
@@ -25,6 +35,52 @@ public class App {
 	public void alterarCLiente(){
 		
 	}
+=======
+
+	public void consultarCliente() {
+		String cpf = entrada.next("Digite o cpf do cliente: ");
+		for (Cliente c : cliente) {
+			if (c.getCPF().equals(cpf)) {
+				System.out.println("Cliente:" + c.getNome() + "CPF: " + c.getCPF());
+			} else {
+				System.out.println("Cliente não encontrado");
+
+			}
+		}
+	}
+
+	public void listarCLiente() {
+		for (Cliente c : cliente) {
+			System.out.println("Cliente:" + c.getNome() + "CPF: " + c.getCPF());
+		}
+	}
+
+	public void excluirCLiente() {
+		String cpf = entrada.next("Digite o cpf do cliente a ser excluido: ");
+		for (Cliente c : cliente) {
+			if (c.getCPF().equals(cpf)) {
+				cliente.remove(c);
+				System.out.println("Cliente excluido");
+			} else {
+				System.out.println("Cliente não encontrado");
+
+			}
+		}
+
+	}
+
+	public void alterarCLiente() {
+		String cpf = entrada.next("Digite o cpf do cliente a ser alterado: ");
+		for (Cliente c : cliente) {
+			if (c.getCPF().equals(cpf)) {
+				c.setNome(entrada.next("Digite o novo nome: "));
+			} else {
+				System.out.println("Cliente não encontrado");
+			}
+		}
+	}
+
+>>>>>>> Stashed changes
 	public static void main(String[] args) {
 		Interface app = new Interface();
 		ArrayList<Cliente> cliente = new ArrayList<Cliente>();
@@ -36,7 +92,11 @@ public class App {
 		String nome, email;
 		Scanner entrada = new Scanner(System.in);
 
+<<<<<<< Updated upstream
 		//variaveis teste
+=======
+		// variaveis teste
+>>>>>>> Stashed changes
 		Cliente a = new Cliente("123.456.789-10", "Arthur");
 		Cliente b = new Cliente("123.456.789-20", "Nathalie");
 		Cliente c = new Cliente("123.456.789-30", "Leane");
