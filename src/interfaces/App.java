@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
+	public ArrayList<Imovel> imovel = new ArrayList<Imovel>();
+	public ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+	public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
+
 	public static void main(String[] args) {
-		ArrayList<Imovel> imovel = new ArrayList<Imovel>();
-		ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-		ArrayList<Fatura> fatura = new ArrayList<Fatura>();
+		
 		Interface app = new Interface();
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
 				List.of("Clientes", "Imóveis", "Faturas", "Pagamentos", "Falhas"));

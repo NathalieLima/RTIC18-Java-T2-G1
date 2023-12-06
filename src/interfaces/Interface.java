@@ -41,7 +41,7 @@ public class Interface {
 					break;
 
 				case 1:
-					x.incluirCliente(cliente);
+					x.incluirCliente();
 					break;
 
 				case 2:
