@@ -198,10 +198,8 @@ public class App {
         System.out.println("Informe a data de início da falha:");
         String dataInicio = entrada.nextLine();
 
-        Falha novaFalha = new Falha();
-        novaFalha.descricao = descricao;
-        novaFalha.previsao = previsao;
-        novaFalha.dataInicio = dataInicio;
+        Falha novaFalha = new Falha(descricao, previsao, dataInicio);
+       
 
         falhas.add(novaFalha);
 
@@ -214,6 +212,33 @@ public class App {
 
         System.out.println("Falha registrada com sucesso.");
     }
+
+     public void incluirFalhaSemMatricula() {
+       
+        System.out.println("Informe a descrição da falha:");
+        String descricao = entrada.nextLine();
+
+        System.out.println("Informe a previsão para a resolução da falha:");
+        String previsao = entrada.nextLine();
+
+        System.out.println("Informe a data de início da falha:");
+        String dataInicio = entrada.nextLine();
+
+        Falha novaFalha = new Falha(descricao, previsao, dataInicio);
+       
+
+        falhas.add(novaFalha);
+
+        
+        Reparo reparo = new Reparo(descricao, previsao, dataInicio);
+        
+        reparo.resolvido = false;
+
+        reparos.add(reparo);
+
+        System.out.println("Falha registrada com sucesso.");
+    }
+
 
     public void listarReparosEmAberto() {
         System.out.println("===== Reparos em Aberto =====");
@@ -252,11 +277,7 @@ public class App {
             System.out.print("Digite uma nova data para inicio ");
             String novaDataInicio = entrada.nextLine();
             Reparo novoReparo = new Reparo(descricaoReparo, novaPrevisao, novaDataInicio);
-            
-
-            novoReparo.descricao = descricaoReparo;
-            novoReparo.previsao = novaPrevisao;
-            novoReparo.dataInicio = novaDataInicio;
+                        
             novoReparo.resolvido = false;                 
 
             

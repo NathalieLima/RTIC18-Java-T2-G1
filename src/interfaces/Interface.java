@@ -194,6 +194,7 @@ public class Interface {
 	}
 	
 	public static void gestaoFalhas() {
+		App x = new App();
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -212,10 +213,12 @@ public class Interface {
 					System.out.println("Retornando...");
 					break;
 				
-				case 1: 
+				case 1:
+					x.incluirFalha();
 					break;
 					
 				case 2:
+					x.incluirFalhaSemMatricula();
 					break;
 					
 				default:
@@ -226,6 +229,7 @@ public class Interface {
 	}
 	
 	public static void gestaoReparos() {
+		App x = new App();
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -245,9 +249,11 @@ public class Interface {
 					break;
 			
 				case 1: 
+					x.listarReparosEmAberto();
 					break;
 					
 				case 2:
+					x.encerrarReparo();
 					break;
 					
 				default:
