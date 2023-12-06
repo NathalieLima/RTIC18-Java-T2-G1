@@ -19,4 +19,12 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	//Construtor
+	public Cliente(String nome, String cpf) {
+		super();
+		this.cpf = cpf;
+		this.nome = nome;
+	}
+	
 }
