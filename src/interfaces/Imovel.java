@@ -45,8 +45,5 @@ public class Imovel extends Cliente {
 		this.ultima_leitura = ultima_leitura;
 		this.penultima_leitura = penultima_leitura;	
 	}
-<<<<<<< Updated upstream
+
 }
-=======
-}
->>>>>>> Stashed changes

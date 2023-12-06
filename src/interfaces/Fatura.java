@@ -9,8 +9,4 @@ public class Fatura {
     private double valor;
     private boolean quitado;
 
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
