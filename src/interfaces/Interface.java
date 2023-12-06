@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Interface {
+	
 
 	
 	public static void mostrarMensagemDefault(ArrayList<String> lista_opcoes) {
@@ -73,6 +74,7 @@ public class Interface {
 	
 	public static void gestaoImoveis() {
 		int opcao_usuario = 1;
+		App x = new App();
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
 		List.of("Inserir", "Consultar", "Listar", "Excluir", "Alterar")
@@ -91,18 +93,23 @@ public class Interface {
 					break;
 			
 				case 1: 
+					x.incluirImovel();
 					break;
 					
 				case 2:
+					x.consultaImovel();
 					break;
 					
 				case 3:
+					x.listarImovel();
 					break;
 					
 				case 4:
+					x.excluirImovel();
 					break;
 					
 				case 5:
+					x.alteraImovel();
 					break;
 					
 				default:
