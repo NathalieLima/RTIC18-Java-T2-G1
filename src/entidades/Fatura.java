@@ -59,5 +59,4 @@ public class Fatura {
         this.valor = valor;
         this.quitado = quitado;
     }
-
 }

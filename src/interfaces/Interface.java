@@ -3,8 +3,59 @@ package interfaces;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import entidades.Cliente;
+import entidades.Fatura;
+import entidades.Imovel;
 
-public class Interface {
+public class Interface 
+{
+	public static void executarSistema(App app) {
+		Scanner entrada = new Scanner(System.in);
+		int opcao_usuario = 1;
+		ArrayList<String> lista_opcoes = new ArrayList<String>(
+				List.of("Clientes", "Imóveis", "Faturas", "Pagamentos", "Falhas"));
+
+		while (opcao_usuario != 0) {
+			// Exibir opções do menu
+			Interface.montarMenu("principal", lista_opcoes);
+
+			// Pegar opção do usuário
+			System.out.print("\nSua opção: ");
+			opcao_usuario = entrada.nextInt();
+
+			// Execução de gestão conforme opção do usuário
+			switch (opcao_usuario) {
+				case 0:
+					System.out.println("Fim do programa!");
+					break;
+
+				case 1:
+					gestaoClientes(app);
+					break;
+
+				case 2:
+					gestaoImoveis(app);
+					break;
+
+				case 3:
+					gestaoFaturas(app);
+					break;
+
+				case 4:
+					gestaoPagamentos(app);
+					break;
+
+				case 5:
+					gestaoFalhas(app);
+					break;
+
+				default:
+					mostrarMensagemDefault(lista_opcoes);
+					break;
+			}
+		}
+	}
+
 	public static void mostrarMensagemDefault(ArrayList<String> lista_opcoes) {
 		System.out.println("Insira um número entre 0 e " + lista_opcoes.size());
 	}
@@ -22,8 +73,7 @@ public class Interface {
 		System.out.println("0. " + (is_principal ? "Sair do programa" : "Voltar ao menu anterior"));
 	}
 	
-	public static void gestaoClientes() {
-		App x = new App();
+	public static void gestaoClientes(App app) {
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -43,35 +93,34 @@ public class Interface {
 					break;
 			
 				case 1:
-					x.incluirCliente();
+					app.incluirCliente();
 					break;
 					
 				case 2:
-					x.consultarCliente();
+					app.consultarCliente();
 					break;
 					
 				case 3:
-					x.listarCliente();
+					app.listarCliente();
 					break;
 					
 				case 4:
-					x.excluirCliente();
+					app.excluirCliente();
 					break;
 					
 				case 5:
-					x.alterarCliente();
+					app.alterarCliente();
 					break;
 					
 				default:
-					Interface.mostrarMensagemDefault(lista_opcoes);
+					mostrarMensagemDefault(lista_opcoes);
 					break;
 			}
 		}
 	}
 	
-	public static void gestaoImoveis() {
+	public static void gestaoImoveis(App app) {
 		int opcao_usuario = 1;
-		App x = new App();
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
 		List.of("Inserir", "Consultar", "Listar", "Excluir", "Alterar")
@@ -90,23 +139,23 @@ public class Interface {
 					break;
 			
 				case 1: 
-					x.incluirImovel();
+					app.incluirImovel();
 					break;
 					
 				case 2:
-					x.consultaImovel();
+					app.consultaImovel();
 					break;
 					
 				case 3:
-					x.listarImovel();
+					app.listarImovel();
 					break;
 					
 				case 4:
-					x.excluirImovel();
+					app.excluirImovel();
 					break;
 					
 				case 5:
-					x.alteraImovel();
+					app.alteraImovel();
 					break;
 					
 				default:
@@ -116,9 +165,8 @@ public class Interface {
 		}
 	}
 
-	public static void gestaoFaturas() {
+	public static void gestaoFaturas(App app) {
 		int opcao_usuario = 1;
-		App x = new App();
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
 		List.of("Registro de consumo", "Listar faturas", "Listar Faturas não pagas")
@@ -137,15 +185,15 @@ public class Interface {
 					break;
 			
 				case 1: 
-					x.lerConsumo();
+					app.lerConsumo();
 					break;
 					
 				case 2:
-					x.listarFatura();
+					app.listarFatura();
 					break;
 				
 					case 3:
-					x.listarFaturaInadinplente();
+					app.listarFaturaInadinplente();
 					break;
 					
 				default:
@@ -155,7 +203,7 @@ public class Interface {
 		}
 	}
 	
-	public static void gestaoPagamentos() {
+	public static void gestaoPagamentos(App app) {
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -164,7 +212,7 @@ public class Interface {
 		
 		while (opcao_usuario != 0) 
 		{
-			Interface.montarMenu("gestão de clientes", lista_opcoes);
+			Interface.montarMenu("gestão de pagamentos", lista_opcoes);
 			System.out.print("\nSua opção: ");
 			opcao_usuario = entrada.nextInt();
 			
@@ -175,12 +223,15 @@ public class Interface {
 					break;
 					
 				case 1: 
+					//app.
 					break;
 					
 				case 2:
+					//app.
 					break;
 					
 				case 3:
+					//app.
 					break;
 					
 				default:
@@ -190,7 +241,7 @@ public class Interface {
 		}
 	}
 	
-	public static void gestaoFalhas() {
+	public static void gestaoFalhas(App app) {
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -210,9 +261,11 @@ public class Interface {
 					break;
 				
 				case 1: 
+					//app.
 					break;
 					
 				case 2:
+					//app.
 					break;
 					
 				default:
@@ -222,7 +275,7 @@ public class Interface {
 		}
 	}
 	
-	public static void gestaoReparos() {
+	public static void gestaoReparos(App app) {
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -242,9 +295,11 @@ public class Interface {
 					break;
 			
 				case 1: 
+					//app.
 					break;
 					
 				case 2:
+					//app.
 					break;
 					
 				default:
@@ -254,7 +309,8 @@ public class Interface {
 		}
 	}
 	
-	
-		
-	
+	public static void main(String[] args) {
+		App app = new App();
+		executarSistema(app);
+	}
 }
