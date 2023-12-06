@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.ArrayList;
+
 public class Imovel extends Cliente {
 	private String matricula;
 	private String endereco;
@@ -45,5 +47,5 @@ public class Imovel extends Cliente {
 		this.ultima_leitura = ultima_leitura;
 		this.penultima_leitura = penultima_leitura;	
 	}
-
+	
 }

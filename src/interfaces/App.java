@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,8 +9,7 @@ public class App {
 	Scanner entrada = new Scanner(System.in);
 	ArrayList<Cliente> cliente = new ArrayList<Cliente>();
 	ArrayList<Imovel> imovel = new ArrayList<Imovel>();
-
-	
+	ArrayList<Fatura> fatura = new ArrayList<Fatura>();
 
 	public void incluirCliente() {
 		System.out.println("Incluir cliente");
@@ -21,20 +21,20 @@ public class App {
 		cliente.add(fulano);
 	}
 
-
 	public void consultarCliente() {
 		System.out.println("Consultar cliente, digite o CPF: ");
 		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("Cliente:" + c.getNome() + "CPF: " + c.getCPF());
-			} 
+			}
 		}
 	}
 
 	public void listarCliente() {
 		for (Cliente c : cliente) {
-			System.out.println("Cliente: " + c.getNome() + "  CPF: " + c.getCPF());
+			System.out.println("\nCliente: " + c.getNome());
+			System.out.println("CPF: " + c.getCPF() + "\n");
 		}
 	}
 
@@ -45,9 +45,8 @@ public class App {
 			if (c.getCPF().equals(cpf)) {
 				cliente.remove(c);
 				System.out.println("Cliente excluido");
-			} 
+			}
 		}
-
 	}
 
 	public void alterarCliente() {
@@ -58,27 +57,29 @@ public class App {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("Digite o novo nome: ");
 				c.setNome(entrada.next());
-			} 
-		}
-	}
-	public void incluirImovel() {
-			System.out.println("Digite o cpf do dono do imovel: ");
-			String cpf = entrada.next();
-			for (Cliente c : cliente) {
-				if (c.getCPF().equals(cpf)) {
-					System.out.println("digite a matricula:");
-					String matricula = entrada.next();
-					System.out.println("digite o endereço:");
-					String endereco = entrada.next();
-					System.out.println("digite a ultima leitura:");
-					double ultima_leitura = entrada.nextDouble();
-					System.out.println("digite a penultima leitura:");
-					double penultima_leitura = entrada.nextDouble();
-					Imovel imovel = new Imovel(c.getNome(), c.getCPF(), matricula, endereco, ultima_leitura, penultima_leitura);
-					
-				} 
 			}
 		}
+	}
+
+	public void incluirImovel() {
+		System.out.println("Digite o cpf do dono do imovel: ");
+		String cpf = entrada.next();
+		for (Cliente c : cliente) {
+			if (c.getCPF().equals(cpf)) {
+				System.out.println("digite a matricula:");
+				String matricula = entrada.next();
+				System.out.println("digite o endereço:");
+				String endereco = entrada.next();
+				System.out.println("digite a ultima leitura:");
+				double ultima_leitura = entrada.nextDouble();
+				System.out.println("digite a penultima leitura:");
+				double penultima_leitura = entrada.nextDouble();
+				Imovel novoimovel = new Imovel(c.getNome(), c.getCPF(), matricula, endereco, ultima_leitura,
+						penultima_leitura);
+
+			}
+		}
+	}
 
 	public void consultaImovel() {
 		System.out.println("Consultar imovel, digite a matricula: ");
@@ -87,30 +88,34 @@ public class App {
 			if (i.getMatricula().equals(matricula)) {
 				System.out.println("Cliente:" + i.getNome() + "CPF: " + i.getCPF());
 				System.out.println("Matricula:" + i.getMatricula() + "Endereco: " + i.getEndereco());
-				System.out.println("Ultima leitura:" + i.getUltima_leitura() + "Penultima leitura: " + i.getPenultima_leitura());
-			} 
+				System.out.println(
+						"Ultima leitura:" + i.getUltima_leitura() + "Penultima leitura: " + i.getPenultima_leitura());
+			}
 		}
 	}
 
-	public void listarImovel(){
+	public void listarImovel() {
 		for (Imovel i : imovel) {
 			System.out.println("Cliente:" + i.getNome() + "CPF: " + i.getCPF());
 			System.out.println("Matricula:" + i.getMatricula() + "Endereco: " + i.getEndereco());
-			System.out.println("Ultima leitura:" + i.getUltima_leitura() + "Penultima leitura: " + i.getPenultima_leitura());
-			
+			System.out.println(
+					"Ultima leitura:" + i.getUltima_leitura() + "Penultima leitura: " + i.getPenultima_leitura());
+
 		}
 	}
-	public void excluirImovel(){
+
+	public void excluirImovel() {
 		System.out.println("Para excluir imovel, digite a matricula: ");
 		String matricula = entrada.next();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
 				imovel.remove(i);
 				System.out.println("Imovel excluido");
-			} 
+			}
 		}
 	}
-	public void alteraImovel(){
+
+	public void alteraImovel() {
 		System.out.println("Para alterar imovel, digite a matricula: ");
 		String matricula = entrada.next();
 		for (Imovel i : imovel) {
@@ -121,9 +126,55 @@ public class App {
 				i.setUltima_leitura(entrada.nextDouble());
 				System.out.println("Digite o nova penultima leitura: ");
 				i.setPenultima_leitura(entrada.nextDouble());
-			} 
+			}
 		}
 	}
+
+	public void lerConsumo() {
+		System.out.println("Digite a mátricula do imóvel");
+		String matricula = entrada.next();
+		for (Imovel i : imovel) {
+			if (i.getMatricula().equals(matricula)) {
+				System.out.println("Digite a nova leitura");
+				double novaleitura = entrada.nextDouble();
+				i.setPenultima_leitura(i.getUltima_leitura());
+				i.setUltima_leitura(novaleitura);
+				double valor = 10 * (novaleitura - i.getPenultima_leitura());
+				Fatura fat = new Fatura(LocalDate.now(), i.getUltima_leitura(), i.getPenultima_leitura(), valor, true);
+				fatura.add(fat);
+			}
+		}
+
+	}
+
+	public void listarFatura() {
+		System.out.println("Digite a mátricula do imóvel");
+		String matricula = entrada.next();
+		for (Imovel i : imovel) {
+			if (i.getMatricula().equals(matricula)) {
+				for (Fatura f : fatura) {
+					System.out.println("Data: " + f.getData() + "Valor: " + f.getValor() + "Quitado: " + f.getQuitado());
+				}
+
+			}
+		}
+	}
+
+	public void listarFaturaInadinplente() {
+		System.out.println("Digite a mátricula do imóvel");
+		String matricula = entrada.next();
+		for (Imovel i : imovel) {
+			if (i.getMatricula().equals(matricula)) {
+				for (Fatura f : fatura) {
+					if (!f.getQuitado()) {
+						System.out.println("Data: " + f.getData() + "Valor: " + f.getValor() + "Quitado: ");
+					}
+				}
+
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		Interface app = new Interface();
 		ArrayList<Cliente> cliente = new ArrayList<Cliente>();
@@ -134,7 +185,6 @@ public class App {
 		int opcao_usuario = 1;
 		String nome, email;
 		Scanner entrada = new Scanner(System.in);
-
 
 		Cliente a = new Cliente("123.456.789-10", "Arthur");
 		Cliente b = new Cliente("123.456.789-20", "Nathalie");

@@ -121,9 +121,10 @@ public class Interface {
 
 	public static void gestaoFaturas() {
 		int opcao_usuario = 1;
+		App x = new App();
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-		List.of("Registro de consumo", "Listar faturas")
+		List.of("Registro de consumo", "Listar faturas", "Listar Faturas não pagas")
 		);
 		
 		while (opcao_usuario != 0) 
@@ -139,9 +140,15 @@ public class Interface {
 					break;
 			
 				case 1: 
+					x.lerConsumo();
 					break;
 					
 				case 2:
+					x.listarFatura();
+					break;
+				
+					case 3:
+					x.listarFaturaInadinplente();
 					break;
 					
 				default:
