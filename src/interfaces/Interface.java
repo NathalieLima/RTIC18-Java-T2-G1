@@ -235,51 +235,7 @@ public class Interface {
 		}
 	}
 	
-	public static void main(String[] args) 
-	{
-		ArrayList<String> lista_opcoes = new ArrayList<String>(
-		List.of("Imóveis", "Faturas", "Pagamentos", "Falhas")
-		);
-		int opcao_usuario = 1;
-		String nome, email;
-		Scanner entrada = new Scanner(System.in);
+	
 		
-		while (opcao_usuario != 0) 
-		{
-			Interface.montarMenu("principal", lista_opcoes);
-			System.out.print("\nSua opção: ");
-			opcao_usuario = entrada.nextInt();
-			
-			switch (opcao_usuario)
-			{
-				case 0:
-					System.out.println("Fim do programa!");
-					break;
-				
-				case 1: // Imóveis
-					gestaoClientes();
-					break;
-					
-				case 2: // Faturas
-					gestaoImoveis();
-					break;
-					
-				case 3:
-					gestaoFaturas();
-					break;
-					
-				case 4:
-					gestaoPagamentos();
-					break;
-					
-				case 5:
-					gestaoFalhas();
-					break;
-					
-				default:
-					Interface.mostrarMensagemDefault(lista_opcoes);
-					break;
-			}
-		}
-	}
+	
 }
