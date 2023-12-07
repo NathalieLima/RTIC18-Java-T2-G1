@@ -32,10 +32,16 @@ public class App {
 	public void consultarCliente() {
 		System.out.println("Consultar cliente, digite o CPF: ");
 		String cpf = entrada.next();
+		boolean flag = false;
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("Cliente:" + c.getNome() + "  CPF: " + c.getCPF());
-			}
+				flag = true;
+				}
+			
+		}
+		if(!flag) {
+			System.out.println("CPF nao encontrado");
 		}
 	}
 
@@ -47,26 +53,38 @@ public class App {
 	}
 
 	public void excluirCliente() {
+		boolean flag = false;
 		System.out.println("Digite o cpf do cliente a ser excluido:");
 		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				cliente.remove(c);
 				System.out.println("Cliente excluido");
+				flag = true;
 			}
 		}
+		if(!flag) {
+			System.out.println("CPF nao encontrado");
+		}
+		
 	}
 
 	public void alterarCliente() {
-
+		boolean flag = false;
 		System.out.println("Digite o cpf do cliente a ser alterado:");
 		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("Digite o novo nome: ");
 				c.setNome(entrada.next());
+				flag = true;
+
 			}
 		}
+		if(!flag) {
+			System.out.println("CPF nao encontrado");
+		}
+
 	}
 
 	public void incluirImovel() {
@@ -93,9 +111,11 @@ public class App {
 	public void consultaImovel() {
 		System.out.println("Consultar imovel, digite a matricula: ");
 		String matricula = entrada.next();
+		boolean flag = false;
 		String nome = new String();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
+				flag = true;
 				for (Cliente c : cliente) {
 					if (c.getCPF().equals(i.getCPF())) {
 						nome = c.getNome();
@@ -106,6 +126,9 @@ public class App {
 				System.out.println("Ultima leitura: " + i.getUltima_leitura() + " | Penultima leitura: "
 						+ i.getPenultima_leitura());
 			}
+		}
+		if(!flag) {
+			System.out.println("Matricula nao encontrada");
 		}
 	}
 
@@ -118,19 +141,25 @@ public class App {
 	}
 
 	public void excluirImovel() {
+		boolean flag = false;
 		System.out.println("Para excluir imovel, digite a matricula: ");
 		String matricula = entrada.next();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
 				imovel.remove(i);
 				System.out.println("Imovel excluido");
+				flag = true;
 			}
+		}
+		if(!flag) {
+			System.out.println("Matricula nao encontrada");
 		}
 	}
 
 	public void alteraImovel() {
 		System.out.println("Para alterar imovel, digite a matricula: ");
 		String matricula = entrada.next();
+		boolean flag = false;
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
 				System.out.println("Digite o novo endereço: ");
@@ -139,12 +168,18 @@ public class App {
 				i.setUltima_leitura(entrada.nextDouble());
 				System.out.println("Digite o nova penultima leitura: ");
 				i.setPenultima_leitura(entrada.nextDouble());
+				flag = true;
 			}
+		}
+		if(!flag) {
+			System.out.println("Matricula nao encontrada");
 		}
 	}
 
 	public void lerConsumo() {
 		System.out.println("Digite a mátricula do imóvel");
+		boolean flag = false;
+
 		String matricula = entrada.next();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
@@ -156,12 +191,17 @@ public class App {
 				Fatura fat = new Fatura(LocalDate.now(), i.getUltima_leitura(), i.getPenultima_leitura(), valor,
 						matricula, false);
 				fatura.add(fat);
+				flag = true;
 			}
+		}
+		if(!flag) {
+			System.out.println("Matricula nao encontrada");
 		}
 	}
 
 	public void listarFatura() {
 		System.out.println("Digite a mátricula do imóvel");
+		boolean flag = false;
 		String matricula = entrada.next();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
@@ -169,13 +209,17 @@ public class App {
 					System.out.println(
 							"Data: " + f.getData() + "  Valor: " + f.getValor() + "  Quitado: " + f.getQuitado());
 				}
-
+				flag = true;
 			}
+		}
+		if(!flag) {
+			System.out.println("Matricula nao encontrada");
 		}
 	}
 
 	public void listarFaturaInadinplente() {
 		System.out.println("Digite a mátricula do imóvel");
+		boolean flag = false;
 		String matricula = entrada.next();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
@@ -184,19 +228,25 @@ public class App {
 						System.out.println("Data: " + f.getData() + "  Valor: " + f.getValor() + "  Quitado: ");
 					}
 				}
+				flag = true;
 			}
+		}
+		if(!flag) {
+			System.out.println("Matricula nao encontrada");
 		}
 	}
 
 	public void pagarfatura() {
 		System.out.println("Digite a matricula do imovel");
 		String matricula = entrada.next();
+		boolean flag = false;
 		System.out.println("Digite a data da fatura no formato AAAA-MM-DD:");
 		LocalDate dataFatura = LocalDate.parse(entrada.next());
 		double totalpagamento = 0, pagamento = 0;
 		LocalDate dataPagamento = LocalDate.now();
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
+				flag = true;
 				for (Fatura f : fatura) {
 					if (!f.getQuitado()) {
 						System.out.println("Insira seu pagamento: ");
@@ -228,6 +278,9 @@ public class App {
 					}
 				}
 			}
+			if(!flag) {
+			System.out.println("Matricula nao encontrada");
+		}
 		}
 	}
 
@@ -291,7 +344,7 @@ public class App {
 				String descricao = entrada.nextLine();
 				System.out.println("Informe a previsão em dias:");
 				int previsao = entrada.nextInt();
-				System.out.println("Informe a data que aconteceu da falha:");
+				System.out.println("Informe a data que aconteceu da falha no formato aaaa-mm-dd:");
 				LocalDate dataInicio = LocalDate.parse(entrada.next());
 				Falha novaFalha = new Falha(descricao, previsao, dataInicio);
 				falhas.add(novaFalha);
@@ -355,7 +408,7 @@ public class App {
 		System.out.println("Resolvido: " + (reparo.resolvido ? "Sim" : "Não"));
 		System.out.println("-----------");
 
-
+		entrada.nextLine();
 		System.out.println("A falha associada a este reparo foi resolvida? (Digite 's' para Sim ou 'n' para Não)");
 		char resposta = entrada.nextLine().toLowerCase().charAt(0);
 		if (resposta == 's') {
@@ -364,6 +417,7 @@ public class App {
 		} else if (resposta == 'n') {
 			System.out.println("Digite uma nova previsão em dias: ");
 			int novaPrevisao = entrada.nextInt();
+			entrada.nextLine();
 			LocalDate novaDataInicio;
 			try {
 				System.out.print("Digite uma nova data para inicio (no formato yyyy-mm-dd): ");
