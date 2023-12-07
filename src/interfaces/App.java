@@ -35,7 +35,12 @@ public class App {
 	    }
     }
 	public void listarCLiente(){
-
+        System.out.println("Listagem de clientes: ");
+        for (Cliente c : cliente) {
+            System.out.println("Nome: " + c.getNome());
+            System.out.println("CPF: " + c.getCPF());
+            
+        }
 	}
 	public void excluirCLiente(){
 		
