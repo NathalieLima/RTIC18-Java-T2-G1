@@ -21,12 +21,17 @@ public class App {
 
 	public void incluirCliente() {
 		System.out.println("Incluir cliente");
-		System.out.println("digite o nome:");
+		System.out.print("Digite o nome: ");
 		String nome = entrada.nextLine();
-		System.out.println("digite o cpf:");
-		String cpf = entrada.next();
-		Cliente fulano = new Cliente(nome, cpf);
-		cliente.add(fulano);
+		System.out.print("Digite o CPF: ");
+		String cpf = entrada.nextLine();
+
+		if (Utilidades.isCPFValido(cpf)) {
+			Cliente fulano = new Cliente(nome, cpf);
+			cliente.add(fulano);
+		} else {
+			System.out.println("Entre com um CPF válido.");
+		}
 	}
 
 	public void consultarCliente() {
@@ -37,11 +42,10 @@ public class App {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("Cliente:" + c.getNome() + "  CPF: " + c.getCPF());
 				flag = true;
-				}
-			
+			}
 		}
-		if(!flag) {
-			System.out.println("CPF nao encontrado");
+		if (!flag) {
+			System.out.println("CPF não encontrado");
 		}
 	}
 
@@ -63,10 +67,10 @@ public class App {
 				flag = true;
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("CPF nao encontrado");
 		}
-		
+
 	}
 
 	public void alterarCliente() {
@@ -81,31 +85,50 @@ public class App {
 
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("CPF nao encontrado");
 		}
 
 	}
 
 	public void incluirImovel() {
-		System.out.println("Digite o cpf do dono do imovel: ");
-		String cpf = entrada.next();
-		
-		for (Cliente c : cliente) {
-			if (c.getCPF().equals(cpf)) {
-				System.out.println("digite a matricula:");
-				String matricula = entrada.next();
-				System.out.println("digite o endereço:");
-				String endereco = entrada.next();
-				System.out.println("digite a ultima leitura:");
-				double ultima_leitura = entrada.nextDouble();
-				System.out.println("digite a penultima leitura:");
-				double penultima_leitura = entrada.nextDouble();
-				Imovel i = new Imovel(cpf, matricula, endereco, ultima_leitura, penultima_leitura);
-				imovel.add(i);
+		if (cliente.size() == 0) {
+			System.out.println("Não há clientes cadastrados no momento.");
+		} else {
+			System.out.println("Digite o cpf do dono do imovel: ");
+			String cpf = entrada.nextLine();
 
+			boolean flag = false;
+			for (Cliente c : cliente) {
+				if (c.getCPF().equals(cpf)) {
+					System.out.println("Cliente:" + c.getNome() + "  CPF: " + c.getCPF());
+					flag = true;
+				}
 			}
+			if (!flag) {
+				System.out.println("CPF não encontrado");
+			} else {
+				for (Cliente c : cliente) {
+					if (c.getCPF().equals(cpf)) {
+						System.out.print("Digite a matricula:");
+						String matricula = entrada.nextLine();
+						System.out.print("Digite o endereço:");
+						String endereco = entrada.nextLine();
+						System.out.print("Digite a ultima leitura:");
+						double ultima_leitura = entrada.nextDouble();
+						System.out.print("Digite a penultima leitura:");
+						double penultima_leitura = entrada.nextDouble();
+						Imovel i = new Imovel(cpf, matricula, endereco, ultima_leitura, penultima_leitura);
+						imovel.add(i);					
+					}
+				}
+			}
+
+			
+
+			
 		}
+
 	}
 
 	public void consultaImovel() {
@@ -127,7 +150,7 @@ public class App {
 						+ i.getPenultima_leitura());
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("Matricula nao encontrada");
 		}
 	}
@@ -142,28 +165,35 @@ public class App {
 
 	public void excluirImovel() {
 		boolean flag = false;
-		System.out.println("Para excluir imovel, digite a matricula: ");
-		String matricula = entrada.next();
-		for (Imovel i : imovel) {
-			if (i.getMatricula().equals(matricula)) {
-				imovel.remove(i);
+		System.out.print("Para excluir imovel, digite a matricula: ");
+		entrada.nextLine();
+		String matricula = entrada.nextLine();
+		int index_imovel = 0;
+		
+		for (int i = 0; i < imovel.size(); i++) {
+			if (imovel.get(i).getMatricula().equals(matricula)) {
+				index_imovel = i;
 				System.out.println("Imovel excluido");
 				flag = true;
 			}
 		}
-		if(!flag) {
+
+		if (!flag) {
 			System.out.println("Matricula nao encontrada");
+		} else {
+			imovel.remove(imovel.get(index_imovel));
 		}
 	}
 
 	public void alteraImovel() {
-		System.out.println("Para alterar imovel, digite a matricula: ");
-		String matricula = entrada.next();
+		entrada.nextLine();
+		System.out.print("Para alterar imovel, digite a matricula: ");
+		String matricula = entrada.nextLine();
 		boolean flag = false;
 		for (Imovel i : imovel) {
 			if (i.getMatricula().equals(matricula)) {
 				System.out.println("Digite o novo endereço: ");
-				i.setEndereco(entrada.next());
+				i.setEndereco(entrada.nextLine());
 				System.out.println("Digite a nova ultima leitura: ");
 				i.setUltima_leitura(entrada.nextDouble());
 				System.out.println("Digite o nova penultima leitura: ");
@@ -171,7 +201,7 @@ public class App {
 				flag = true;
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("Matricula nao encontrada");
 		}
 	}
@@ -194,7 +224,7 @@ public class App {
 				flag = true;
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("Matricula nao encontrada");
 		}
 	}
@@ -212,7 +242,7 @@ public class App {
 				flag = true;
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("Matricula nao encontrada");
 		}
 	}
@@ -231,7 +261,7 @@ public class App {
 				flag = true;
 			}
 		}
-		if(!flag) {
+		if (!flag) {
 			System.out.println("Matricula nao encontrada");
 		}
 	}
@@ -278,9 +308,9 @@ public class App {
 					}
 				}
 			}
-			if(!flag) {
-			System.out.println("Matricula nao encontrada");
-		}
+			if (!flag) {
+				System.out.println("Matricula nao encontrada");
+			}
 		}
 	}
 
@@ -379,7 +409,7 @@ public class App {
 		int i = 0;
 		for (Reparo reparo : reparos) {
 			if (!reparo.resolvido) {
-				System.out.println("Reparo "+ i+1);
+				System.out.println("Reparo " + i + 1);
 				System.out.println("Descrição: " + reparo.descricao);
 				System.out.println("Previsão: " + reparo.previsao);
 				System.out.println("Data de Início: " + reparo.dataInicio);
@@ -399,7 +429,7 @@ public class App {
 		entrada.nextLine();
 		System.out.println("Informe o número do reparo:");
 		int descricaoReparo = entrada.nextInt();
-		Reparo reparo = reparos.get(descricaoReparo-1);
+		Reparo reparo = reparos.get(descricaoReparo - 1);
 		System.out.println();
 		System.out.println("Descrição: " + reparo.descricao);
 		System.out.println("Previsão: " + reparo.previsao);

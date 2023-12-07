@@ -9,7 +9,7 @@ import entidades.Cliente;
 
 public class Utilidades 
 {
-    public boolean isCPFValido(String CPF) {
+    public static boolean isCPFValido(String CPF) {
         if ( CPF.length() != 11 || !CPF.chars().allMatch(Character::isDigit) ) {
             return false;
         }
