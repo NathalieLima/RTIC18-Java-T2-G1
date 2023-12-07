@@ -172,7 +172,7 @@ public class Interface
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-		List.of("Registro de consumo", "Listar faturas", "Listar Faturas não pagas")
+		List.of("Registro de consumo/criar fatura", "Listar faturas", "Listar Faturas não pagas")
 		);
 		
 		while (opcao_usuario != 0) 
