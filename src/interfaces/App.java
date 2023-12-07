@@ -192,22 +192,18 @@ public class App {
         System.out.println("Informe a descrição da falha:");
         String descricao = entrada.nextLine();
 
-        System.out.println("Informe a previsão para a resolução da falha:");
+        System.out.println("Informe a previsão em dias:");
         String previsao = entrada.nextLine();
 
-        System.out.println("Informe a data de início da falha:");
+        System.out.println("Informe a data que aconteceu da falha:");
         String dataInicio = entrada.nextLine();
 
         Falha novaFalha = new Falha(descricao, previsao, dataInicio);
        
-
         falhas.add(novaFalha);
-
         
         Reparo reparo = new Reparo(descricao, previsao, dataInicio);
         
-        reparo.resolvido = false;
-
         reparos.add(reparo);
 
         System.out.println("Falha registrada com sucesso.");
@@ -226,14 +222,10 @@ public class App {
 
         Falha novaFalha = new Falha(descricao, previsao, dataInicio);
        
-
         falhas.add(novaFalha);
-
         
         Reparo reparo = new Reparo(descricao, previsao, dataInicio);
         
-        reparo.resolvido = false;
-
         reparos.add(reparo);
 
         System.out.println("Falha registrada com sucesso.");
@@ -247,8 +239,13 @@ public class App {
                 System.out.println("Descrição: " + reparo.descricao);
                 System.out.println("Previsão: " + reparo.previsao);
                 System.out.println("Data de Início: " + reparo.dataInicio);
+                System.out.println("Data de Fim: " + reparo.dataFim);
                 System.out.println("Resolvido: " + (reparo.resolvido ? "Sim" : "Não"));
                 System.out.println("-----------");
+            }else {
+                System.out.println(" ");
+                System.out.println("Nenhum Raparo encontrado!");
+                System.out.println(" ");
             }
         }
     }
@@ -264,30 +261,38 @@ public class App {
             return;
         }
 
-        System.out.println("A falha associada a este reparo foi resolvida? (Sim/Não)");
-        String resposta = entrada.nextLine().toLowerCase();
-
-        if ("sim".equals(resposta)) {
+        System.out.println("A falha associada a este reparo foi resolvida? (Digite 's' para Sim ou 'n' para Não)");
+        char resposta = entrada.nextLine().toLowerCase().charAt(0);
+        
+        if (resposta == 's') {
             reparo.resolvido = true;
             System.out.println("Reparo encerrado com sucesso.");
-        } else if ("não".equals(resposta)) {
+        } else if (resposta == 'n') {
+            System.out.println("Digite uma nova previsão em dias: ");        
             
-            System.out.print("Digite uma nova previsão em dias: ");
             String novaPrevisao = entrada.nextLine();
-            System.out.print("Digite uma nova data para inicio ");
-            String novaDataInicio = entrada.nextLine();
-            Reparo novoReparo = new Reparo(descricaoReparo, novaPrevisao, novaDataInicio);
-                        
-            novoReparo.resolvido = false;                 
-
-            
-
-            reparos.add(novoReparo);
-
-            System.out.println("Novo reparo criado para a mesma falha.");
+           
+            String novaDataInicio;
+            try {
+                System.out.print("Digite uma nova data para inicio (no formato dd/MM/yyyy): ");
+                novaDataInicio = entrada.nextLine();
+        
+                Reparo novoReparo = new Reparo(descricaoReparo, novaPrevisao, novaDataInicio);
+                novoReparo.resolvido = false;                 
+        
+                reparos.add(novoReparo);
+        
+                System.out.println("Novo reparo criado para a mesma falha.");
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida para previsão. Certifique-se de inserir um valor numérico.");
+            }
         } else {
             System.out.println("Resposta inválida.");
         }
+   
+
+        
+          
     }
 
     public Imovel buscarImovelPorMatricula(String matricula) {
@@ -314,11 +319,12 @@ public class App {
 
 	public static void main(String[] args) {
 		Interface app = new Interface();
+        App x = new App();
 		ArrayList<Cliente> cliente = new ArrayList<Cliente>();
 		ArrayList<Fatura> fatura = new ArrayList<Fatura>();
 		ArrayList<Imovel> imovel = new ArrayList<Imovel>();
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-				List.of("Clientes", "Imóveis", "Faturas", "Pagamentos", "Falhas"));
+				List.of("Clientes", "Imóveis", "Faturas", "Pagamentos", "Falhas", "Reparos"));
 		int opcao_usuario = 1;
 		String nome, email;
 		Scanner entrada = new Scanner(System.in);
@@ -354,9 +360,11 @@ public class App {
 					break;
 
 				case 5:
-					app.gestaoFalhas();
-					break;
-
+					app.gestaoFalhas(x);
+                    break;
+                case 6:
+                    app.gestaoReparos(x);
+                    break;
 				default:
 					Interface.mostrarMensagemDefault(lista_opcoes);
 					break;

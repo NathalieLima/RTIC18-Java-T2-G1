@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Interface {
 	
-
 	
 	public static void mostrarMensagemDefault(ArrayList<String> lista_opcoes) {
 		System.out.println("Insira um número entre 0 e " + lista_opcoes.size());
@@ -26,7 +26,9 @@ public class Interface {
 	}
 	
 	public static void gestaoClientes() {
+
 		App x = new App();
+		
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -46,6 +48,7 @@ public class Interface {
 					break;
 			
 				case 1:
+				
 					x.incluirCliente();
 					break;
 					
@@ -193,8 +196,9 @@ public class Interface {
 		}
 	}
 	
-	public static void gestaoFalhas() {
-		App x = new App();
+	
+
+	public static void gestaoFalhas(App app) {
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
@@ -214,11 +218,11 @@ public class Interface {
 					break;
 				
 				case 1:
-					x.incluirFalha();
+					app.incluirFalha();
 					break;
 					
 				case 2:
-					x.incluirFalhaSemMatricula();
+					app.incluirFalhaSemMatricula();
 					break;
 					
 				default:
@@ -228,12 +232,12 @@ public class Interface {
 		}
 	}
 	
-	public static void gestaoReparos() {
-		App x = new App();
+	public static void gestaoReparos(App app) {
+		
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-		List.of("Listar reparos em aberto", "Encerrar reparo (poss outro)")
+		List.of("Listar reparos em aberto", "Encerrar reparo (ou criar outro)")
 		);
 		
 		while (opcao_usuario != 0) 
@@ -249,11 +253,11 @@ public class Interface {
 					break;
 			
 				case 1: 
-					x.listarReparosEmAberto();
+					app.listarReparosEmAberto();
 					break;
 					
 				case 2:
-					x.encerrarReparo();
+					app.encerrarReparo();
 					break;
 					
 				default:

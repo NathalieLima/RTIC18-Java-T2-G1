@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Reparo {
-    private String descricao;
-    private String previsao;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
-    private boolean resolvido;
+    public String descricao;
+    public String previsao;
+    public LocalDate dataInicio;
+    public LocalDate dataFim;
+    public boolean resolvido;
 
     public Reparo(String descricao, String previsao, String dataInicio) {
         this.descricao = descricao;

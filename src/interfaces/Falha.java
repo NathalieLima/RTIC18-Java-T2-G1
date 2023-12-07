@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Falha {
-    private String descricao;
-    private String previsao;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
+    public String descricao;
+    public String previsao;
+    public LocalDate dataInicio;
+    public LocalDate dataFim;
 
     public Falha(String descricao, String previsao, String dataInicio) {
         this.descricao = descricao;
