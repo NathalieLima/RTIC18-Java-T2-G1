@@ -56,8 +56,21 @@ public class App {
 		}
 	}
 	public void alterarCLiente(){
-		
+		System.out.print("Digite o CPF do cliente que deseja alterar: ");
+        String cpfAlterar = entrada.next();
+
+        for (Cliente c : cliente) {
+            if (c.getCPF().equals(cpfAlterar)) {
+                System.out.println("Cliente encontrado:");
+                System.out.println("Nome atual: " + c.getNome());
+                System.out.print("Digite o novo nome: ");
+                String novoNome = entrada.next();
+                c.setNome(novoNome);
+                System.out.println("Nome atualizado com sucesso para: " + c.getNome());
+                
+        }
 	}
+}
 	public static void main(String[] args) {
 		Interface app = new Interface();
 		ArrayList<Cliente> cliente = new ArrayList<Cliente>();
