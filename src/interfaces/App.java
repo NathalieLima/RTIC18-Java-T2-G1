@@ -35,6 +35,7 @@ public class App {
 	    }
     }
 	public void listarCLiente(){
+        
         System.out.println("Listagem de clientes: ");
         for (Cliente c : cliente) {
             System.out.println("Nome: " + c.getNome());
@@ -44,6 +45,15 @@ public class App {
 	}
 	public void excluirCLiente(){
 		
+        System.out.println("Digite o cpf do cliente que deseja excluir:");
+		String cpfexcluir = entrada.next();
+		
+        for (Cliente c : cliente) {
+			if (c.getCPF().equals(cpfexcluir)) {
+				cliente.remove(c);
+				System.out.println("Cliente excluido com sucesso");
+			}
+		}
 	}
 	public void alterarCLiente(){
 		
