@@ -8,17 +8,13 @@ public class Falha {
     private int previsao;
     private LocalDate dataInicio;
     private LocalDate dataFim;
-    private String matricula;
-    private boolean distribuicao = false;
 
 
 
-    public Falha(String descricao, int previsao, LocalDate dataInicio, String matricula) {
+    public Falha(String descricao, int previsao, LocalDate dataInicio) {
         this.descricao = descricao;
         this.previsao = previsao;
         this.dataInicio = dataInicio;
-        this.matricula = matricula;
-        
     }
 
     
