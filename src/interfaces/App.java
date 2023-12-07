@@ -16,11 +16,13 @@ public class App {
 	ArrayList<Fatura> fatura = new ArrayList<Fatura>();
 	ArrayList<Pagamento> pagamentos = new ArrayList<Pagamento>();
 	ArrayList<Reembolso> reembolsos = new ArrayList<Reembolso>();
+	ArrayList<Reparo> reparos = new ArrayList<Reparo>();
+	ArrayList<Falha> falhas = new ArrayList<Falha>();
 
 	public void incluirCliente() {
 		System.out.println("Incluir cliente");
 		System.out.println("digite o nome:");
-		String nome = entrada.next();
+		String nome = entrada.nextLine();
 		System.out.println("digite o cpf:");
 		String cpf = entrada.next();
 		Cliente fulano = new Cliente(nome, cpf);
@@ -32,7 +34,7 @@ public class App {
 		String cpf = entrada.next();
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
-				System.out.println("Cliente:" + c.getNome() + "CPF: " + c.getCPF());
+				System.out.println("Cliente:" + c.getNome() + "  CPF: " + c.getCPF());
 			}
 		}
 	}
@@ -70,6 +72,7 @@ public class App {
 	public void incluirImovel() {
 		System.out.println("Digite o cpf do dono do imovel: ");
 		String cpf = entrada.next();
+		
 		for (Cliente c : cliente) {
 			if (c.getCPF().equals(cpf)) {
 				System.out.println("digite a matricula:");
@@ -275,4 +278,116 @@ public class App {
 			}
 		}
 	}
+
+	public void incluirFalha() {
+		System.out.println("Informe a matrícula do imóvel associado à falha:");
+		String matricula = entrada.next();
+		entrada.nextLine();
+		boolean flag = false;
+
+		for (Imovel i : imovel) {
+			if (matricula.equals(i.getMatricula())) {
+				System.out.println("Informe a descrição da falha:");
+				String descricao = entrada.nextLine();
+				System.out.println("Informe a previsão em dias:");
+				int previsao = entrada.nextInt();
+				System.out.println("Informe a data que aconteceu da falha:");
+				LocalDate dataInicio = LocalDate.parse(entrada.next());
+				Falha novaFalha = new Falha(descricao, previsao, dataInicio, matricula);
+				falhas.add(novaFalha);
+				Reparo reparo = new Reparo(descricao, previsao, dataInicio);
+				reparos.add(reparo);
+				System.out.println("Falha registrada com sucesso.");
+				flag = true;
+			}
+		}
+		if (!flag) {
+			System.out.println("Matricula não encontrada.");
+		}
+	}
+
+	public void incluirFalhaSemMatricula() {
+
+		System.out.println("Informe a descrição da falha:");
+		String descricao = entrada.nextLine();
+		System.out.println("Informe a previsão para a resolução da falha:");
+		int previsao = entrada.nextInt();
+		System.out.println("Informe a data de início da falha no formato aaaa-mm-dd:");
+		LocalDate dataInicio = LocalDate.parse(entrada.next());
+		Falha novaFalha = new Falha(descricao, previsao, dataInicio, null);
+		falhas.add(novaFalha);
+		Reparo reparo = new Reparo(descricao, previsao, dataInicio);
+		reparos.add(reparo);
+		System.out.println("Falha registrada com sucesso.");
+	}
+
+	public void listarReparosEmAberto() {
+		System.out.println("===== Reparos em Aberto =====");
+		for (Reparo reparo : reparos) {
+			if (!reparo.resolvido) {
+				System.out.println("Descrição: " + reparo.descricao);
+				System.out.println("Previsão: " + reparo.previsao);
+				System.out.println("Data de Início: " + reparo.dataInicio);
+				System.out.println("Data de Fim: " + reparo.dataFim);
+				System.out.println("Resolvido: " + (reparo.resolvido ? "Sim" : "Não"));
+				System.out.println("-----------");
+			} else {
+				System.out.println(" ");
+				System.out.println("Nenhum Raparo encontrado!");
+				System.out.println(" ");
+			}
+		}
+	}
+
+	public void encerrarReparo() {
+		System.out.println("Informe a descrição do reparo a ser encerrado:");
+		String descricaoReparo = entrada.nextLine();
+
+		Reparo reparo = buscarReparoPorDescricao(descricaoReparo);
+
+		if (reparo == null) {
+			System.out.println("Reparo não encontrado.");
+			return;
+		}
+
+		System.out.println("A falha associada a este reparo foi resolvida? (Digite 's' para Sim ou 'n' para Não)");
+		char resposta = entrada.nextLine().toLowerCase().charAt(0);
+
+		if (resposta == 's') {
+			reparo.resolvido = true;
+			System.out.println("Reparo encerrado com sucesso.");
+		} else if (resposta == 'n') {
+			System.out.println("Digite uma nova previsão em dias: ");
+
+			int novaPrevisao = entrada.nextInt();
+
+			LocalDate novaDataInicio;
+			try {
+				System.out.print("Digite uma nova data para inicio (no formato yyyy-mm-dd): ");
+				novaDataInicio = LocalDate.parse(entrada.nextLine());
+
+				Reparo novoReparo = new Reparo(descricaoReparo, novaPrevisao, novaDataInicio);
+				novoReparo.resolvido = false;
+
+				reparos.add(novoReparo);
+
+				System.out.println("Novo reparo criado para a mesma falha.");
+			} catch (NumberFormatException e) {
+				System.out.println("Entrada inválida para previsão. Certifique-se de inserir um valor numérico.");
+			}
+		} else {
+			System.out.println("Resposta inválida.");
+		}
+
+	}
+
+	public Reparo buscarReparoPorDescricao(String descricao) {
+		for (Reparo reparo : reparos) {
+			if (reparo.descricao.equals(descricao)) {
+				return reparo;
+			}
+		}
+		return null;
+	}
+
 }

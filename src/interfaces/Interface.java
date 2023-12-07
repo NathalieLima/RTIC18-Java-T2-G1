@@ -13,7 +13,7 @@ public class Interface
 		Scanner entrada = new Scanner(System.in);
 		int opcao_usuario = 1;
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-				List.of("Clientes", "Imóveis", "Faturas", "Pagamentos", "Falhas"));
+				List.of("Clientes", "Imóveis", "Faturas", "Pagamentos", "Falhas", "Reparos"));
 
 		while (opcao_usuario != 0) {
 			// Exibir opções do menu
@@ -47,6 +47,9 @@ public class Interface
 
 				case 5:
 					gestaoFalhas(app);
+					break;
+				case 6: 
+					gestaoReparos(app);
 					break;
 
 				default:
@@ -265,11 +268,11 @@ public class Interface
 					break;
 				
 				case 1: 
-					//app.
+					app.incluirFalha();
 					break;
 					
 				case 2:
-					//app.
+					app.incluirFalhaSemMatricula();
 					break;
 					
 				default:
@@ -283,7 +286,7 @@ public class Interface
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-		List.of("Listar reparos em aberto", "Encerrar reparo (poss outro)")
+		List.of("Listar reparos em aberto", "Encerrar reparo (possivelmente criar outro)")
 		);
 		
 		while (opcao_usuario != 0) 
@@ -299,11 +302,11 @@ public class Interface
 					break;
 			
 				case 1: 
-					//app.
+					app.listarReparosEmAberto();
 					break;
 					
 				case 2:
-					//app.
+					app.encerrarReparo();
 					break;
 					
 				default:
