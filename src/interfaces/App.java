@@ -323,8 +323,10 @@ public class App {
 
 	public void listarReparosEmAberto() {
 		System.out.println("===== Reparos em Aberto =====");
+		int i = 0;
 		for (Reparo reparo : reparos) {
 			if (!reparo.resolvido) {
+				System.out.println("Reparo "+ i+1);
 				System.out.println("Descrição: " + reparo.descricao);
 				System.out.println("Previsão: " + reparo.previsao);
 				System.out.println("Data de Início: " + reparo.dataInicio);
@@ -336,17 +338,23 @@ public class App {
 				System.out.println("Nenhum Raparo encontrado!");
 				System.out.println(" ");
 			}
+			i++;
 		}
 	}
 
 	public void encerrarReparo() {
-		System.out.println("Informe a descrição do reparo a ser encerrado:");
-		String descricaoReparo = entrada.nextLine();
-		Reparo reparo = buscarReparoPorDescricao(descricaoReparo);
-		if (reparo == null) {
-			System.out.println("Reparo não encontrado.");
-			return;
-		}
+		entrada.nextLine();
+		System.out.println("Informe o número do reparo:");
+		int descricaoReparo = entrada.nextInt();
+		Reparo reparo = reparos.get(descricaoReparo-1);
+		System.out.println();
+		System.out.println("Descrição: " + reparo.descricao);
+		System.out.println("Previsão: " + reparo.previsao);
+		System.out.println("Data de Início: " + reparo.dataInicio);
+		System.out.println("Data de Fim: " + reparo.dataFim);
+		System.out.println("Resolvido: " + (reparo.resolvido ? "Sim" : "Não"));
+		System.out.println("-----------");
+
 
 		System.out.println("A falha associada a este reparo foi resolvida? (Digite 's' para Sim ou 'n' para Não)");
 		char resposta = entrada.nextLine().toLowerCase().charAt(0);
@@ -361,7 +369,7 @@ public class App {
 				System.out.print("Digite uma nova data para inicio (no formato yyyy-mm-dd): ");
 				novaDataInicio = LocalDate.parse(entrada.nextLine());
 
-				Reparo novoReparo = new Reparo(descricaoReparo, novaPrevisao, novaDataInicio);
+				Reparo novoReparo = new Reparo(reparo.getDescricao(), novaPrevisao, novaDataInicio);
 				novoReparo.resolvido = false;
 
 				reparos.add(novoReparo);
