@@ -293,7 +293,7 @@ public class App {
 				int previsao = entrada.nextInt();
 				System.out.println("Informe a data que aconteceu da falha:");
 				LocalDate dataInicio = LocalDate.parse(entrada.next());
-				Falha novaFalha = new Falha(descricao, previsao, dataInicio, matricula);
+				Falha novaFalha = new Falha(descricao, previsao, dataInicio);
 				falhas.add(novaFalha);
 				Reparo reparo = new Reparo(descricao, previsao, dataInicio);
 				reparos.add(reparo);
@@ -307,14 +307,14 @@ public class App {
 	}
 
 	public void incluirFalhaSemMatricula() {
-
+		entrada.nextLine();
 		System.out.println("Informe a descrição da falha:");
 		String descricao = entrada.nextLine();
 		System.out.println("Informe a previsão para a resolução da falha:");
 		int previsao = entrada.nextInt();
 		System.out.println("Informe a data de início da falha no formato aaaa-mm-dd:");
 		LocalDate dataInicio = LocalDate.parse(entrada.next());
-		Falha novaFalha = new Falha(descricao, previsao, dataInicio, null);
+		Falha novaFalha = new Falha(descricao, previsao, dataInicio);
 		falhas.add(novaFalha);
 		Reparo reparo = new Reparo(descricao, previsao, dataInicio);
 		reparos.add(reparo);
@@ -342,9 +342,7 @@ public class App {
 	public void encerrarReparo() {
 		System.out.println("Informe a descrição do reparo a ser encerrado:");
 		String descricaoReparo = entrada.nextLine();
-
 		Reparo reparo = buscarReparoPorDescricao(descricaoReparo);
-
 		if (reparo == null) {
 			System.out.println("Reparo não encontrado.");
 			return;
@@ -352,15 +350,12 @@ public class App {
 
 		System.out.println("A falha associada a este reparo foi resolvida? (Digite 's' para Sim ou 'n' para Não)");
 		char resposta = entrada.nextLine().toLowerCase().charAt(0);
-
 		if (resposta == 's') {
 			reparo.resolvido = true;
 			System.out.println("Reparo encerrado com sucesso.");
 		} else if (resposta == 'n') {
 			System.out.println("Digite uma nova previsão em dias: ");
-
 			int novaPrevisao = entrada.nextInt();
-
 			LocalDate novaDataInicio;
 			try {
 				System.out.print("Digite uma nova data para inicio (no formato yyyy-mm-dd): ");
@@ -389,5 +384,4 @@ public class App {
 		}
 		return null;
 	}
-
 }
