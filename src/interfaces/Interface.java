@@ -207,8 +207,7 @@ public class Interface
 		int opcao_usuario = 1;
 		Scanner entrada = new Scanner(System.in);
 		ArrayList<String> lista_opcoes = new ArrayList<String>(
-		List.of("Inclusão de pagamentos", "Listar pagamentos", "Listar reembolsos")
-		);
+		List.of("Inclusão de pagamentos", "Listar todos os pagamentos", "Listar pagamentos de uma fatura", "Listar todos reembolsos", "Listar reembolsos de uma fatura"));
 		
 		while (opcao_usuario != 0) 
 		{
@@ -223,15 +222,20 @@ public class Interface
 					break;
 					
 				case 1: 
-					//app.
+					app.pagarfatura();
 					break;
 					
 				case 2:
-					//app.
+					app.listarPagamentos();
 					break;
-					
 				case 3:
-					//app.
+					app.listarPagamentosFatura();
+					break;
+				case 4:
+					app.listarreembolsos();
+					break;
+				case 5:
+					app.listarReembolsosFatura();
 					break;
 					
 				default:

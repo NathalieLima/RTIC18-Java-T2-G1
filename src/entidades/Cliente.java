@@ -1,8 +1,10 @@
 package entidades;
+import java.util.ArrayList;
 
 public class Cliente {
 	private String cpf;
 	private String nome;
+	//ArrayList<String> residencias = new ArrayList<String>();
 	
 	public String getCPF() {
 		return this.cpf;

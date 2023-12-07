@@ -8,6 +8,7 @@ public class Fatura {
     private double penultima_leitura;
     private double valor;
     private boolean quitado = false;
+    private String matricula;
 
     // setters and getters
 
@@ -50,13 +51,19 @@ public class Fatura {
     public void setPenultima_leitura(double penultima_leitura) {
         this.penultima_leitura = penultima_leitura;
     }
-
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {   
+        this.matricula = matricula;
+    }
     // Construtor
-    public Fatura(LocalDate data, double ultima_leitura, double penultima_leitura, double valor, boolean quitado) {
+    public Fatura(LocalDate data, double ultima_leitura, double penultima_leitura, double valor, String matricula, boolean quitado) {
         this.data = data;
         this.ultima_leitura = ultima_leitura;
         this.penultima_leitura = penultima_leitura;
         this.valor = valor;
+        this.matricula=matricula;
         this.quitado = quitado;
     }
 }
