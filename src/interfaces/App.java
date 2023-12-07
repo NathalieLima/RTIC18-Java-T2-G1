@@ -14,8 +14,26 @@ public class App {
 		cliente.add(fulano);
 	}
 	public void consultarCliente(){
+        System.out.print("Digite o CPF do cliente que deseja consultar: ");
+    String cpf = entrada.next();
+
+    boolean encontrado = false;
+
+    for (Cliente c : cliente) {
+        if (c.getCPF().equals(cpf)) {
+            System.out.println("Cliente encontrado:");
+            System.out.println("Nome: " + c.getNome());
+            System.out.println("CPF: " + c.getCPF());
+            encontrado = true;
+            break;
+        }
+
+        if (!encontrado) {
+        System.out.println("Cliente não encontrado.");
+        }
 	
-	}
+	    }
+    }
 	public void listarCLiente(){
 
 	}
