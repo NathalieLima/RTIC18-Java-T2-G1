@@ -20,7 +20,6 @@ public class Imovel {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
-
 	}
 
 	public String getEndereco() {
@@ -28,7 +27,6 @@ public class Imovel {
 	}
 
 	public void setUltima_leitura(double ultima_leitura) {
-
 		this.ultima_leitura = ultima_leitura;
 	}
 
@@ -37,7 +35,7 @@ public class Imovel {
 	}
 
 	public void setPenultima_leitura(double penultima_leitura) {
-		this.ultima_leitura = penultima_leitura;
+		this.penultima_leitura = penultima_leitura;
 	}
 
 	public double getPenultima_leitura() {

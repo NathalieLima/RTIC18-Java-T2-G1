@@ -45,6 +45,14 @@ public class Reparo {
         return dataInicio.plusDays(previsao);
     }
 
+    public LocalDate setDataFim() {
+        if (resolvido) {
+            this.dataFim = dataInicio.plusDays(previsao);
+        }
+
+        return this.dataFim;
+    }
+
     public boolean isResolvido() {
         return resolvido;
     }
